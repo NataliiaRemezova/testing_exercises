@@ -1,7 +1,6 @@
 import pytest
 from functions.level_2.four_sentiment import check_tweet_sentiment
 
-
 @pytest.mark.parametrize(
     "test_text, test_good_words, test_bad_words, expected_result",
     [

@@ -1,7 +1,6 @@
 from functions.level_2.three_first import first, NOT_SET
 import pytest
 
-
 @pytest.mark.parametrize(
         "items, default, expected_value",
         [
