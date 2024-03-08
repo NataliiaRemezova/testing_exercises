@@ -1,26 +1,15 @@
+import pytest
 from functions.level_2.four_sentiment import check_tweet_sentiment
 
 
-def test__check_tweet_sentiment__should_find_positive_sentiment():
-    test_text = "positive text"
-    test_good_words = {"positive"}
-    test_bad_words = {"negative"}
-    assert check_tweet_sentiment(text = test_text, good_words = test_good_words, bad_words = test_bad_words) == "GOOD"
-
-def test__check_tweet_sentiment__should_find_negative_sentiment():
-    test_text = "negative text"
-    test_good_words = {"positive"}
-    test_bad_words = {"negative"}
-    assert check_tweet_sentiment(text = test_text, good_words = test_good_words, bad_words = test_bad_words) == "BAD"
-
-def test__check_tweet_sentiment__shoud_return_none():
-    test_text = "text"
-    test_good_words = {"positive"}
-    test_bad_words = {"negative"}
-    assert check_tweet_sentiment(text = test_text, good_words = test_good_words, bad_words = test_bad_words) == None
-
-def test__check_tweet_sentiment__should_lower_capital_letters():
-    test_text = "Positive Text"
-    test_good_words = {"positive"}
-    test_bad_words = {"negative"}
-    assert check_tweet_sentiment(text = test_text, good_words = test_good_words, bad_words = test_bad_words) == "GOOD"
+@pytest.mark.parametrize(
+    "test_text, test_good_words, test_bad_words, expected_result",
+    [
+        ("positive text", {"positive"}, {"negative"}, "GOOD"),
+        ("negative text", {"positive"}, {"negative"}, "BAD"),
+        ("text", {"positive"}, {"negative"}, None),
+        ("Positive Text", {"positive"}, {"negative"}, "GOOD"),
+    ]
+)
+def test__check_tweet_sentiment__should_find_positive_negative_or_none_sentiment_and_handle_capitalization(test_text, test_good_words, test_bad_words, expected_result):
+    assert check_tweet_sentiment(text=test_text, good_words=test_good_words, bad_words=test_bad_words) == expected_result

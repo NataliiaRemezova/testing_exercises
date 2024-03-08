@@ -1,17 +1,34 @@
 import math
+import pytest
 from functions.level_2.two_square_equation import solve_square_equation
 
-def test__solve_square_equation__should_return_answer_with_negative_numbers():
-    assert solve_square_equation(square_coefficient = 1, linear_coefficient = 5, const_coefficient = 6) == (-3.0, -2.0)
 
-# Problem with answer recognition in solve_square_equation(): 
-# if the sequence of numbers is changed, which does not affect the answer of the equation, 
-# e.g. (-2.0, -3.0) instead of (-3.0, -2.0), the test fails with an error
-def test__solve_square_equation__should_fail_if_answer_sequence_changed():
-    assert solve_square_equation(square_coefficient = 1, linear_coefficient = 5, const_coefficient = 6) != (-2.0, -3.0)
+@pytest.mark.parametrize(
+        "square_coefficient,linear_coefficient,const_coefficient,expected_set",
+        [
+            (1, 5, 6, {-3.0, -2.0}),
+            (2, 8, 8, {-2.0})
+        ]
+)
+def test__solve_square_equation__should_return_answer_with_negative_numbers(square_coefficient: int, linear_coefficient: int, const_coefficient: int, expected_set: set[float]):
+    assert set(solve_square_equation(square_coefficient = square_coefficient, linear_coefficient = linear_coefficient, const_coefficient = const_coefficient)) == expected_set
 
-def test__solve_square_equation__should_return_answer_with_positive_numbers():
-    assert solve_square_equation(square_coefficient = 1, linear_coefficient = -5, const_coefficient = 6) == (2.0, 3.0)
+@pytest.mark.parametrize(
+        "square_coefficient,linear_coefficient,const_coefficient,expected_set",
+        [
+            (1, -5, 6, {3.0, 2.0}),
+            (2, -8, 8, {2.0})
+        ]
+)
+def test__solve_square_equation__should_return_answer_with_positive_numbers(square_coefficient: int, linear_coefficient: int, const_coefficient: int, expected_set: set[float]):
+    assert set(solve_square_equation(square_coefficient = square_coefficient, linear_coefficient = linear_coefficient, const_coefficient = const_coefficient)) == expected_set
 
-def test__solve_square_equation__should_return_no_possible_solution():
-    assert solve_square_equation(square_coefficient = 1, linear_coefficient = 4, const_coefficient = 5) == (None, None)
+@pytest.mark.parametrize(
+        "square_coefficient,linear_coefficient,const_coefficient,expected_set",
+        [
+            (1, 5, 7, {None}),
+            (1, -3, 7, {None})
+        ]
+)
+def test__solve_square_equation__should_return_no_possible_solution(square_coefficient: int, linear_coefficient: int, const_coefficient: int, expected_set: set[float]):
+    assert set(solve_square_equation(square_coefficient = square_coefficient, linear_coefficient = linear_coefficient, const_coefficient = const_coefficient)) == expected_set
