@@ -55,7 +55,6 @@ test_card = BankCard(last_digits="1234", owner="John Doe")
         ),
     ]
 )
-
 def test__calculate_average_daily_expenses__should_calculate_and_compare_expected_average_per_day(expenses, expected_average):
     calculated_average = calculate_average_daily_expenses(expenses)
     assert calculated_average == expected_average

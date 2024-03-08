@@ -72,6 +72,5 @@ test_card = BankCard(last_digits="1234", owner="John Doe")
         ),
     ]
 )
-
 def test__find_fraud_expenses__should_find_repetative_expenses_and_detect_fraud(history, expected_frauds):
     assert find_fraud_expenses(history) == expected_frauds

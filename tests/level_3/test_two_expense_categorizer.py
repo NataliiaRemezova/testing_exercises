@@ -82,6 +82,5 @@ test_card = BankCard(last_digits="1234", owner="John Doe")
             ),
     ]
 )
-
 def test__guess_expense_category__should_format_and_read_spent_in_input_set_correct_expense_category(expense, expected_category):
     assert guess_expense_category(expense) == expected_category

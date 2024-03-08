@@ -80,7 +80,6 @@ test_card = BankCard(last_digits="1234", owner="John Doe")
         ),
     ]
 )
-
 def test_is_subscription(expense, history, expected_result):
     assert is_subscription(expense, history) == expected_result
     
